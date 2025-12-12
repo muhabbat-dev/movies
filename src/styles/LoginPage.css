@@ -150,3 +150,9 @@ form,
 button {
   cursor: pointer;
 }
+
+.form-message {
+  display: flex;
+  justify-content:center;
+  margin-top: 20px;
+}
