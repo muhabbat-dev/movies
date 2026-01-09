@@ -6,5 +6,5 @@ export const userRequests = {
 
 export const movieRequests = {
   fetchAllMovies: '/movies',
-  fetchNetflixOriginals: '/movies?category= Netflix Originals',
+  fetchNetflixOriginals: '/movies?category=Netflix Originals',
 }

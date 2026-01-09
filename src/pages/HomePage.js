@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import Banner from "../components/Banner";
 
 const HomePage = () => {
   return (
-    <div>
-      HomePage
+    <div
+      className="page"
+      style={{ backgroundColor: "#111", overflow: "hidden" }}
+    >
+      <Banner />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
