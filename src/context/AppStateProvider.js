@@ -4,6 +4,7 @@ import AppStateReducer from "./AppStateReducer";
 const INITIAL_STATE = {
   isAuthenticated: localStorage.getItem("user") ? true : false,
   user: JSON.parse(localStorage.getItem("user")),
+  isDarkMode: localStorage.getItem('isDarkMode') ? true : false
 };
 
 export const AppStateContext = createContext(INITIAL_STATE);

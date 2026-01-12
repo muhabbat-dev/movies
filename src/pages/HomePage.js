@@ -12,10 +12,22 @@ import {
   selectMoviesStatus,
 } from "../slices/movieSlice";
 
+import useAppDispatch from '../hooks/useAppStateContext'
+
+import MovieSkeleton from "../components/MovieSkeleton";
+
+
 const HomePage = () => {
+
+  const { isDarkMode } = useAppDispatch()
   const dispatch = useDispatch();
   const status = useSelector(selectMoviesStatus);
   const movies = useSelector(selectAllMovies);
+
+  
+
+
+  
 
   useEffect(() => {
     if (status === "idle") {
@@ -26,13 +38,21 @@ const HomePage = () => {
   return (
     <div
       className="page"
-      style={{ backgroundColor: "#111", overflow: "hidden" }}
-    >
+      style={{ backgroundColor: !isDarkMode? "#111" : "#fafafa", overflow: "hidden" }}
+    > 
+      
       <Navbar />
       <Banner />
       {Object.keys(movies).map((title) => (
-        <Row key={title} title={title} movies={movies[title]} />
+        <div key={title}>
+          {
+            status == 'loading' ? <MovieSkeleton />
+            :
+            <Row title={title} movies={movies[title]} />
+          }
+        </div>
       ))}
+
     </div>
   );
 };

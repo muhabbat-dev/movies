@@ -18,6 +18,27 @@ const AppStateReducer = (state, action) => {
         user: null,
       };
     }
+    case 'SwitchLight':{
+      localStorage.setItem(
+        "isDarkMode",
+        false
+      );
+      return {
+        ...state,
+        isDarkMode : false
+      }
+    }
+
+    case 'SwitchDark': {
+      localStorage.setItem(
+        "isDarkMode",
+        true
+      );
+      return {
+        ...state,
+        isDarkMode : true
+      }
+    }
     default:
       return state;
   }

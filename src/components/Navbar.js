@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import useAppStateContext from "../hooks/useAppStateContext";
+import ThemeSwitch from "./ThemeSwitch";
 
 const Navbar = () => {
   const { dispatch } = useAppStateContext();
+
+   
 
   const [show, setShow] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -35,6 +38,7 @@ const Navbar = () => {
     navigate("/login");
   };
 
+
   return (
     <div className={`nav ${show && "nav_black"}`}>
       <img
@@ -48,12 +52,16 @@ const Navbar = () => {
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-yQFL1YOsN3esm6p1jB1HT-Q6qKtxtZqh9LGwMDIgDCy-p54eMf8jdGSN6yZUeySqseA&usqp=CAU"
         alt="Netflix avatar"
       />
+
+      <ThemeSwitch />
       {showDropDown && (
         <div className="dropdown">
           <span>John Doe</span>
           <span onClick={(event) => handleLogout(event)}>Logout</span>
         </div>
       )}
+
+ 
     </div>
   );
 };

@@ -53,3 +53,9 @@
   background-color: red;
   height: 20px;
 }
+
+
+.theme-wrapper {
+  padding: 20px;
+  /* float: left; */
+}
