@@ -1,11 +1,15 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-
+import { movieApi } from "../constants/axios";
+import { userRequests } from "../constants/requests";
+import { useNavigate } from "react-router-dom";
+ 
 const RegisterForm = () => {
   const [showPass, setShowPass] = useState(false);
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate();
+ 
   const [user, setUser] = useState({
     email: "",
     username: "",
@@ -13,16 +17,36 @@ const RegisterForm = () => {
     city: "",
     street: "",
   });
-
+ 
   const togglePassword = (event) => {
     event.preventDefault();
-
+ 
     console.log(showPass);
     setShowPass(!showPass);
   };
-
-  const registerUser = () => {
-    // call our API
+ 
+  const registerUser = (event) => {
+    event.preventDefault();
+   
+    if (!user.email || !user.password) {
+      setMessage("Email and password are required");
+      return;
+    }
+ 
+    movieApi
+      .post(userRequests.register, {
+        email: user.email,
+        username: user.email, // Use email as username if not provided
+        password: user.password,
+      })
+      .then((response) => {
+        console.log("Registration successful:", response);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Registration error:", error);
+        setMessage(error.response?.data?.error || "Registration failed");
+      });
   };
   return (
     <div>
@@ -80,5 +104,5 @@ const RegisterForm = () => {
     </div>
   );
 };
-
+ 
 export default RegisterForm;
