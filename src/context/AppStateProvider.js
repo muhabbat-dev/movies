@@ -9,7 +9,6 @@ const INITIAL_STATE = {
 export const AppStateContext = createContext(INITIAL_STATE);
 
 export const AppStateProvider = ({ children }) => {
-  console.log({children})
   const [state, dispatch] = useReducer(AppStateReducer, INITIAL_STATE);
 
   return (

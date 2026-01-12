@@ -5,26 +5,23 @@ import { movieApi } from "../constants/axios";
 import { movieRequests } from "../constants/requests";
 import useAppStateContext from "../hooks/useAppStateContext";
 import Row from "../components/Row";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getMovies,
+  selectAllMovies,
+  selectMoviesStatus,
+} from "../slices/movieSlice";
 
 const HomePage = () => {
-  const { appState } = useAppStateContext();
-  const [movies, setMovies] = useState([]);
+  const dispatch = useDispatch();
+  const status = useSelector(selectMoviesStatus);
+  const movies = useSelector(selectAllMovies);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const request = await movieApi.get(movieRequests.fetchAllMovies, {
-          headers: {
-            Authorization: `Bearer ${appState.user.token}`,
-          },
-        });
-        setMovies(request.data.movies);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [appState.user.token]);
+    if (status === "idle") {
+      dispatch(getMovies());
+    }
+  });
 
   return (
     <div
